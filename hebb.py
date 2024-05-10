@@ -32,7 +32,7 @@ def hebb(inputs, target):
     return weights, bias
 
 
-def test(inputs, target, weights, bias, is_binary):
+def test(inputs, target, weights, bias, is_binary_target):
     print('Test:')
     for i in range(len(target)):
         s = 0
@@ -40,8 +40,8 @@ def test(inputs, target, weights, bias, is_binary):
             s += weights[j] * inputs[j][i]
             print(f'{inputs[j][i]},', end='')
         s += bias
-        print(f' y={step_function(s, binary=is_binary)}')
-        if step_function(s, binary=is_binary) != target[i]:
+        print(f' y={step_function(s, binary=is_binary_target)}')
+        if step_function(s, binary=is_binary_target) != target[i]:
             print('Hebb\'s rule is not valid')
             return
     print('Hebb\'s rule is valid')
@@ -59,4 +59,4 @@ if __name__ == '__main__':
         print(f'({w[i]}) * x{i + 1}', end=' + ')
     print(f'({b}) * b')
     print()
-    test(inputs, target, w, b, is_binary=False)
+    test(inputs, target, w, b, is_binary_target=False)
