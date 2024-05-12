@@ -15,19 +15,10 @@ def hebb(inputs, target):
         bias += target[i]
 
         # for printing table
-        rows[i] += [1, target[i]]
-        rows[i] += [dw[j] for j in range(len(dw))]
-        rows[i] += [target[i]]
-        rows[i] += [weights[j] for j in range(len(weights))]
-        rows[i] += [bias]
+        rows[i] += [1, target[i]]+[dw[j] for j in range(len(dw))]+[target[i]]+[weights[j] for j in range(len(weights))]+[bias]
         dw = []
     # for printing table
-    headers = [f'x{i + 1}' for i in range(len(inputs))]
-    headers += ['b', 'y']
-    headers += [f'△w{i + 1}' for i in range(len(inputs))]
-    headers += ['△b']
-    headers += [f'w{i + 1}' for i in range(len(inputs))]
-    headers += ['b']
+    headers = [f'x{i + 1}' for i in range(len(inputs))]+['b', 'y']+[f'△w{i + 1}' for i in range(len(inputs))]+['△b']+[f'w{i + 1}' for i in range(len(inputs))]+['b']
     print(tabulate(rows, headers=headers, tablefmt='fancy_grid'))
     return weights, bias
 
